@@ -3,7 +3,6 @@ import { PRODUCTS } from './data/products';
 import { cartStore } from './store/cartStore';
 
 function Header() {
-  // BUG: Header is not an observer — won't re-render when store changes
   return (
     <header className="header">
       <h1>MobX shop</h1>
@@ -43,7 +42,6 @@ const ProductGrid = observer(() => {
 });
 
 function CartPanel() {
-  // BUG: also not observer
   return (
     <section className="stack" style={{ marginTop: '1.5rem' }}>
       <h2>Cart</h2>

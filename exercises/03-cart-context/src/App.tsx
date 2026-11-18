@@ -125,8 +125,6 @@ export default function App() {
     });
   };
 
-  // BUG: increment uses map but compares wrong field sometimes in candidate chaos —
-  // keep working baseline; drilling is the main smell.
   const inc = (id: string) =>
     setLines((prev) =>
       prev.map((l) => (l.productId === id

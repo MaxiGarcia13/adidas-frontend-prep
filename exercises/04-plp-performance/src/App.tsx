@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { PRODUCTS } from './data/products';
 
 function expensiveFilter(products: Product[], query: string, category: string) {
-  // Artificial CPU burn — candidate should notice and remove/replace.
   let burned = 0;
   for (let i = 0; i < 80_000; i++) burned += i % 7;
 

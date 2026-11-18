@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { PRODUCTS } from './data/products';
 
 function derive(products: Product[], query: string, inStockOnly: boolean, sort: string) {
-  // Pathological: for each product, rescan all products' tags (O(n²))
   const filtered = products.filter((p) => {
     if (inStockOnly && !p.inStock)
       return false;
@@ -29,7 +28,6 @@ export default function App() {
   const [sort, setSort] = useState('name');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // BUG: theme in same component forces derive on theme toggle too
   const visible = derive(PRODUCTS, query, inStockOnly, sort);
 
   return (

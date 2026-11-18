@@ -49,7 +49,6 @@ function MegaProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  // BUG: mega value + new object every render
   const value: AppContextValue = {
     theme,
     setTheme,

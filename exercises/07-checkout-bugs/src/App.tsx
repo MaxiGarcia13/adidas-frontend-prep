@@ -9,7 +9,6 @@ export default function App() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // BUG: no submitting flag → double submit
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
@@ -17,8 +16,6 @@ export default function App() {
 
     try {
       const result = await submitCheckout({ email, size, qty });
-      // BUG: stale mental model — uses email from closure incorrectly after await if user typed;
-      // also crashes when shipping missing
       const city = result.shipping!.city;
       setMessage(`Order ${result.orderId} for ${email} ships to ${city}`);
     } catch (err) {

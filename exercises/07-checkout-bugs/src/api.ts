@@ -15,7 +15,6 @@ export async function submitCheckout(payload: CheckoutPayload): Promise<Checkout
   if (!payload.email.includes('@')) {
     throw new Error('Invalid email');
   }
-  // Sometimes backend omits shipping — UI must not crash
   const includeShipping = payload.qty % 2 === 1;
   return {
     orderId: `ord_${Math.random().toString(36).slice(2, 8)}`,

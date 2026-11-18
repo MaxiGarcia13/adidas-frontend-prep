@@ -12,7 +12,6 @@ export default function App() {
     setLoading(true);
     setError(null);
 
-    // BUG: no cancellation / stale response guard (StrictMode double-invoke).
     fetchProducts()
       .then((data) => {
         setProducts(data);
@@ -35,11 +34,11 @@ export default function App() {
       {error && <p className="error">{error}</p>}
 
       <div className="grid product-grid">
-        {products.map((product, index) => {
-          // BUG: index keys; price may be string → NaN with tax math
-          const withTax = (product.price as number) * 1.21;
+        {products.map((product) => {
+          const withTax = Number(product.price) * 1.21;
+
           return (
-            <article className="card" key={index}>
+            <article className="card" key={product.id}>
               <img src={product.imageUrl} alt={product.name} />
               <h2>{product.name}</h2>
               <p className="muted">{product.brand}</p>

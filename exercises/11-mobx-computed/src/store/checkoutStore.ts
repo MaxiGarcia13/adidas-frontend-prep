@@ -27,9 +27,6 @@ class CheckoutStore {
   setDiscountCode(code: string) {
     this.discountCode = code.trim().toUpperCase();
   }
-
-  // Intentionally incomplete — candidate may add inc/dec actions.
-  // BUG path: UI currently mutates qty directly.
 }
 
 export const checkoutStore = new CheckoutStore();

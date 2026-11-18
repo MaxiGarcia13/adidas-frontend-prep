@@ -54,7 +54,6 @@ const productsSlice = createSlice({
       state.status = 'succeeded';
       state.items = action.payload;
     });
-    // BUG: rejected handler missing — candidate should add
   },
 });
 
@@ -62,7 +61,6 @@ export const { addToCart, toggleFailNext } = productsSlice.actions;
 export default productsSlice.reducer;
 
 export function selectCartTotal(state: { products: State }) {
-  // BUG: ignores qty / wrong join
   return state.products.cart.reduce((sum, line) => {
     const product = state.products.items.find((p) => p.id === line.productId);
     return sum + (product?.price ?? 0);

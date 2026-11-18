@@ -4,7 +4,6 @@ import { checkoutStore } from './store/checkoutStore';
 const TAX_RATE = 0.21;
 
 const App = observer(() => {
-  // BUG: totals computed in component; qty mutated outside actions
   const subtotal = checkoutStore.lines.reduce((n, l) => n + l.price * l.qty, 0);
   const discount = checkoutStore.discountCode === 'SPORT10'
     ? subtotal * 0.1

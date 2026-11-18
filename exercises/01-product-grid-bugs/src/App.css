@@ -1,4 +1,3 @@
-/* BUG: accidentally kills the shared grid layout */
 .product-grid {
   display: block;
 }
