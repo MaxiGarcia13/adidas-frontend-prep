@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { PRODUCTS } from './data/products';
 import { cartStore } from './store/cartStore';
 
-function Header() {
+const Header = observer(() => {
   return (
     <header className="header">
       <h1>MobX shop</h1>
@@ -19,7 +19,7 @@ function Header() {
       </div>
     </header>
   );
-}
+});
 
 const ProductGrid = observer(() => {
   return (
@@ -41,7 +41,7 @@ const ProductGrid = observer(() => {
   );
 });
 
-function CartPanel() {
+const CartPanel = observer(() => {
   return (
     <section className="stack" style={{ marginTop: '1.5rem' }}>
       <h2>Cart</h2>
@@ -69,7 +69,7 @@ function CartPanel() {
       ))}
     </section>
   );
-}
+});
 
 export default function App() {
   return (

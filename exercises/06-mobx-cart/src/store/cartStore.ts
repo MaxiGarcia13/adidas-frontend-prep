@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 export interface CartLine { productId: string; name: string; price: number; qty: number }
 
@@ -6,7 +6,14 @@ class CartStore {
   lines: CartLine[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this, {
+      lines: observable,
+      count: computed,
+      total: computed,
+      add: action,
+      remove: action,
+      setQty: action,
+    });
   }
 
   add(productId: string, name: string, price: number) {
