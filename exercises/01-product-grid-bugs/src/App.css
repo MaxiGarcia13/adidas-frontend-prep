@@ -1,0 +1,13 @@
+/* BUG: accidentally kills the shared grid layout */
+.product-grid {
+  display: block;
+}
+
+.product-grid .card {
+  margin-bottom: 1rem;
+}
+
+.product-grid h2 {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.25rem;
+}
