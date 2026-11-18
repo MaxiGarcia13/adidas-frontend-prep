@@ -53,26 +53,26 @@ Then rotate Tier 2 variants for spaced reps.
 
 ### Tier 1 — core
 
-| ID | Theme | Case | Time |
-|----|-------|------|------|
-| [00-warmup](exercises/00-warmup) | Tooling | Confirm Node/Vite/browser/IDE | ~5 min |
-| [01-product-grid-bugs](exercises/01-product-grid-bugs) | Bug hunt | Fetch race, keys, types, CSS | ~30 min |
-| [02-wishlist-feature](exercises/02-wishlist-feature) | Feature | Wishlist toggle + mock API | ~30–35 min |
-| [03-cart-context](exercises/03-cart-context) | Context API | Prop-drill → Context + reducer | ~30–35 min |
-| [04-plp-performance](exercises/04-plp-performance) | Perf | List re-renders + heavy images | ~30 min |
-| [05-redux-cart](exercises/05-redux-cart) | Redux Toolkit | Slice, selectors, cart bugs | ~30–35 min |
-| [06-mobx-cart](exercises/06-mobx-cart) | MobX | Store + observer + bugs | ~30–35 min |
+| ID                                                     | Theme         | Case                           | Time       |
+| ------------------------------------------------------ | ------------- | ------------------------------ | ---------- |
+| [00-warmup](exercises/00-warmup)                       | Tooling       | Confirm Node/Vite/browser/IDE  | ~5 min     |
+| [01-product-grid-bugs](exercises/01-product-grid-bugs) | Bug hunt      | Fetch race, keys, types, CSS   | ~30 min    |
+| [02-wishlist-feature](exercises/02-wishlist-feature)   | Feature       | Wishlist toggle + mock API     | ~30–35 min |
+| [03-cart-context](exercises/03-cart-context)           | Context API   | Prop-drill → Context + reducer | ~30–35 min |
+| [04-plp-performance](exercises/04-plp-performance)     | Perf          | List re-renders + heavy images | ~30 min    |
+| [05-redux-cart](exercises/05-redux-cart)               | Redux Toolkit | Slice, selectors, cart bugs    | ~30–35 min |
+| [06-mobx-cart](exercises/06-mobx-cart)                 | MobX          | Store + observer + bugs        | ~30–35 min |
 
 ### Tier 2 — variant cases
 
-| ID | Theme | Distinct case | Time |
-|----|-------|---------------|------|
-| [07-checkout-bugs](exercises/07-checkout-bugs) | Bug hunt | Stale closure, double-submit, nulls | ~30 min |
-| [08-filters-url](exercises/08-filters-url) | Feature | Filters synced to URL params | ~30–35 min |
-| [09-context-split](exercises/09-context-split) | Context API | Mega-provider → split contexts | ~30–35 min |
-| [10-redux-async](exercises/10-redux-async) | Redux Toolkit | Async thunk + derived totals | ~30–35 min |
-| [11-mobx-computed](exercises/11-mobx-computed) | MobX | Computed + action discipline | ~30–35 min |
-| [12-perf-filter](exercises/12-perf-filter) | Perf | Expensive derived filter | ~30 min |
+| ID                                             | Theme         | Distinct case                       | Time       |
+| ---------------------------------------------- | ------------- | ----------------------------------- | ---------- |
+| [07-checkout-bugs](exercises/07-checkout-bugs) | Bug hunt      | Stale closure, double-submit, nulls | ~30 min    |
+| [08-filters-url](exercises/08-filters-url)     | Feature       | Filters synced to URL params        | ~30–35 min |
+| [09-context-split](exercises/09-context-split) | Context API   | Mega-provider → split contexts      | ~30–35 min |
+| [10-redux-async](exercises/10-redux-async)     | Redux Toolkit | Async thunk + derived totals        | ~30–35 min |
+| [11-mobx-computed](exercises/11-mobx-computed) | MobX          | Computed + action discipline        | ~30–35 min |
+| [12-perf-filter](exercises/12-perf-filter)     | Perf          | Expensive derived filter            | ~30 min    |
 
 ## Rules of the game
 

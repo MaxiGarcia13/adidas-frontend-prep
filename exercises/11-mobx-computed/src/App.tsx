@@ -1,12 +1,14 @@
-import { observer } from "mobx-react-lite";
-import { checkoutStore } from "./store/checkoutStore";
+import { observer } from 'mobx-react-lite';
+import { checkoutStore } from './store/checkoutStore';
 
 const TAX_RATE = 0.21;
 
-const App = observer(function App() {
+const App = observer(() => {
   // BUG: totals computed in component; qty mutated outside actions
   const subtotal = checkoutStore.lines.reduce((n, l) => n + l.price * l.qty, 0);
-  const discount = checkoutStore.discountCode === "SPORT10" ? subtotal * 0.1 : 0;
+  const discount = checkoutStore.discountCode === 'SPORT10'
+    ? subtotal * 0.1
+    : 0;
   const taxedBase = subtotal - discount;
   const tax = taxedBase * TAX_RATE;
   const total = taxedBase + tax;
@@ -43,7 +45,7 @@ const App = observer(function App() {
         ))}
       </div>
 
-      <label className="stack" style={{ marginTop: "1rem", maxWidth: 280 }}>
+      <label className="stack" style={{ marginTop: '1rem', maxWidth: 280 }}>
         Discount code
         <input
           value={checkoutStore.discountCode}
@@ -53,11 +55,23 @@ const App = observer(function App() {
       </label>
 
       <ul>
-        <li>Subtotal: €{subtotal.toFixed(2)}</li>
-        <li>Discount: €{discount.toFixed(2)}</li>
-        <li>Tax: €{tax.toFixed(2)}</li>
         <li>
-          <strong>Total: €{total.toFixed(2)}</strong>
+          Subtotal: €
+          {subtotal.toFixed(2)}
+        </li>
+        <li>
+          Discount: €
+          {discount.toFixed(2)}
+        </li>
+        <li>
+          Tax: €
+          {tax.toFixed(2)}
+        </li>
+        <li>
+          <strong>
+            Total: €
+            {total.toFixed(2)}
+          </strong>
         </li>
       </ul>
       <p className="muted">Move money math into computed getters; mutate via actions.</p>

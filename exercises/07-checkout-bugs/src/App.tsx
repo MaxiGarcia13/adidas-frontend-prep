@@ -1,9 +1,10 @@
-import { useState, type FormEvent } from "react";
-import { submitCheckout } from "./api";
+import type { FormEvent } from 'react';
+import { useState } from 'react';
+import { submitCheckout } from './api';
 
 export default function App() {
-  const [email, setEmail] = useState("");
-  const [size, setSize] = useState("42");
+  const [email, setEmail] = useState('');
+  const [size, setSize] = useState('42');
   const [qty, setQty] = useState(1);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +22,9 @@ export default function App() {
       const city = result.shipping!.city;
       setMessage(`Order ${result.orderId} for ${email} ships to ${city}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Checkout failed");
+      setError(err instanceof Error
+        ? err.message
+        : 'Checkout failed');
     }
   }
 

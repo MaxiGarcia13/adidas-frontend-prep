@@ -1,4 +1,4 @@
-import { PRODUCTS } from "./data/products";
+import { PRODUCTS } from './data/products';
 // import { loadWishlistIds, saveWishlistIds } from "./api";
 
 export default function App() {
@@ -10,7 +10,10 @@ export default function App() {
       <header className="header">
         <h1>Catalog</h1>
         <div className="row">
-          <span className="badge">Wishlist: {wishlistCount}</span>
+          <span className="badge">
+            Wishlist:
+            {wishlistCount}
+          </span>
           <span className="badge">02</span>
         </div>
       </header>
@@ -23,9 +26,12 @@ export default function App() {
               <img src={product.imageUrl} alt={product.name} />
               <h2>{product.name}</h2>
               <p className="muted">{product.brand}</p>
-              <p>€{product.price}</p>
+              <p>
+                €
+                {product.price}
+              </p>
               <button type="button">
-                {wished ? "♥ Saved" : "♡ Save"}
+                {wished ? '♥ Saved' : '♡ Save'}
               </button>
             </article>
           );

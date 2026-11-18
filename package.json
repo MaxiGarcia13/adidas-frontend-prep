@@ -1,14 +1,11 @@
 {
   "name": "adidas-frontend-prep",
-  "version": "1.0.0",
-  "description": "Adidas frontend interview prep: React/TS exercises (bugs, features, Context, Redux, MobX, performance) with a Cursor interview coach.",
-  "private": true,
   "type": "module",
-  "scripts": {
-    "list": "ls exercises",
-    "dev:00": "pnpm --filter prep-00-warmup dev",
-    "dev:01": "pnpm --filter prep-01-product-grid-bugs dev"
-  },
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
+  "description": "Adidas frontend interview prep: React/TS exercises (bugs, features, Context, Redux, MobX, performance) with a Cursor interview coach.",
+  "license": "ISC",
   "keywords": [
     "adidas",
     "interview",
@@ -16,6 +13,21 @@
     "typescript",
     "frontend"
   ],
-  "license": "ISC",
-  "packageManager": "pnpm@12.21.0"
+  "scripts": {
+    "prepare": "simple-git-hooks",
+    "list": "ls exercises",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "devDependencies": {
+    "@eslint-react/eslint-plugin": "^5.30.3",
+    "@maxigarcia/eslint-config": "^1.17.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "lint-staged": "^17.6.1",
+    "simple-git-hooks": "^2.14.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm dlx lint-staged"
+  }
 }

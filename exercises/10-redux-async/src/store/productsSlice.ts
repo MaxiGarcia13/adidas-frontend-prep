@@ -1,41 +1,44 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { fetchProducts, type Product } from "../api";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { Product } from '../api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchProducts } from '../api';
 
-type Status = "idle" | "loading" | "succeeded" | "failed";
+type Status = 'idle' | 'loading' | 'succeeded' | 'failed';
 
-type CartLine = { productId: string; qty: number };
+interface CartLine { productId: string; qty: number }
 
-type State = {
+interface State {
   items: Product[];
   status: Status;
   error: string | null;
   cart: CartLine[];
   failNext: boolean;
-};
+}
 
 const initialState: State = {
   items: [],
-  status: "idle",
+  status: 'idle',
   error: null,
   cart: [],
   failNext: false,
 };
 
 export const loadProducts = createAsyncThunk(
-  "products/load",
+  'products/load',
   async (_, { getState }) => {
     const state = getState() as { products: State };
     return fetchProducts(state.products.failNext);
-  }
+  },
 );
 
 const productsSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<string>) {
       const line = state.cart.find((l) => l.productId === action.payload);
-      if (line) line.qty += 1;
+      if (line)
+        line.qty += 1;
       else state.cart.push({ productId: action.payload, qty: 1 });
     },
     toggleFailNext(state) {
@@ -44,11 +47,11 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loadProducts.pending, (state) => {
-      state.status = "loading";
+      state.status = 'loading';
       state.error = null;
     });
     builder.addCase(loadProducts.fulfilled, (state, action) => {
-      state.status = "succeeded";
+      state.status = 'succeeded';
       state.items = action.payload;
     });
     // BUG: rejected handler missing — candidate should add
@@ -58,10 +61,10 @@ const productsSlice = createSlice({
 export const { addToCart, toggleFailNext } = productsSlice.actions;
 export default productsSlice.reducer;
 
-export const selectCartTotal = (state: { products: State }) => {
+export function selectCartTotal(state: { products: State }) {
   // BUG: ignores qty / wrong join
   return state.products.cart.reduce((sum, line) => {
     const product = state.products.items.find((p) => p.id === line.productId);
     return sum + (product?.price ?? 0);
   }, 0);
-};
+}

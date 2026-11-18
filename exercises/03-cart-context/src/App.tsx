@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { PRODUCTS, type Product } from "./data/products";
+import type { Product } from './data/products';
+import { useState } from 'react';
+import { PRODUCTS } from './data/products';
 
-type CartLine = { productId: string; name: string; price: number; qty: number };
+interface CartLine { productId: string; name: string; price: number; qty: number }
 
 function Header({
   count,
@@ -15,7 +16,12 @@ function Header({
       <h1>Shop</h1>
       <div className="row">
         <span className="badge">
-          Cart: {count} · €{total}
+          Cart:
+          {' '}
+          {count}
+          {' '}
+          · €
+          {total}
         </span>
         <span className="badge">03</span>
       </div>
@@ -34,7 +40,10 @@ function ProductCard({
     <article className="card">
       <img src={product.imageUrl} alt={product.name} />
       <h2>{product.name}</h2>
-      <p>€{product.price}</p>
+      <p>
+        €
+        {product.price}
+      </p>
       <button type="button" onClick={() => onAdd(product)}>
         Add to cart
       </button>
@@ -68,7 +77,7 @@ function CartPanel({
   onRemove: (id: string) => void;
 }) {
   return (
-    <section className="stack" style={{ marginTop: "1.5rem" }}>
+    <section className="stack" style={{ marginTop: '1.5rem' }}>
       <h2>Cart</h2>
       {lines.length === 0 && <p className="muted">Empty</p>}
       {lines.map((line) => (
@@ -99,10 +108,20 @@ export default function App() {
       const existing = prev.find((l) => l.productId === p.id);
       if (existing) {
         return prev.map((l) =>
-          l.productId === p.id ? { ...l, qty: l.qty + 1 } : l
+          l.productId === p.id
+            ? { ...l, qty: l.qty + 1 }
+            : l,
         );
       }
-      return [...prev, { productId: p.id, name: p.name, price: p.price, qty: 1 }];
+      return [
+        ...prev,
+        {
+          productId: p.id,
+          name: p.name,
+          price: p.price,
+          qty: 1,
+        },
+      ];
     });
   };
 
@@ -110,14 +129,18 @@ export default function App() {
   // keep working baseline; drilling is the main smell.
   const inc = (id: string) =>
     setLines((prev) =>
-      prev.map((l) => (l.productId === id ? { ...l, qty: l.qty + 1 } : l))
+      prev.map((l) => (l.productId === id
+        ? { ...l, qty: l.qty + 1 }
+        : l)),
     );
 
   const dec = (id: string) =>
     setLines((prev) =>
       prev
-        .map((l) => (l.productId === id ? { ...l, qty: l.qty - 1 } : l))
-        .filter((l) => l.qty > 0)
+        .map((l) => (l.productId === id
+          ? { ...l, qty: l.qty - 1 }
+          : l))
+        .filter((l) => l.qty > 0),
     );
 
   const remove = (id: string) =>

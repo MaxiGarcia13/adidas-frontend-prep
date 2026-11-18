@@ -1,8 +1,9 @@
 {
   "name": "prep-09-context-split",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
@@ -18,6 +19,5 @@
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "~5.7.2",
     "vite": "^6.0.0"
-  },
-  "packageManager": "pnpm@12.21.0"
+  }
 }

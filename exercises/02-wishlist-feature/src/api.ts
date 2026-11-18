@@ -1,10 +1,12 @@
-const KEY = "prep-wishlist-ids";
+const KEY = 'prep-wishlist-ids';
 
 export async function loadWishlistIds(): Promise<string[]> {
   await delay(150);
   try {
     const raw = localStorage.getItem(KEY);
-    return raw ? (JSON.parse(raw) as string[]) : [];
+    return raw
+      ? (JSON.parse(raw) as string[])
+      : [];
   } catch {
     return [];
   }

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { fetchProducts, type ProductDto } from "./api";
-import "./App.css";
+import type { ProductDto } from './api';
+import { useEffect, useState } from 'react';
+import { fetchProducts } from './api';
+import './App.css';
 
 export default function App() {
   const [products, setProducts] = useState<ProductDto[]>([]);
@@ -18,7 +19,7 @@ export default function App() {
         setLoading(false);
       })
       .catch(() => {
-        setError("Failed to load products");
+        setError('Failed to load products');
         setLoading(false);
       });
   }, []);
@@ -42,7 +43,12 @@ export default function App() {
               <img src={product.imageUrl} alt={product.name} />
               <h2>{product.name}</h2>
               <p className="muted">{product.brand}</p>
-              <p>€{withTax.toFixed(2)} incl. tax</p>
+              <p>
+                €
+                {withTax.toFixed(2)}
+                {' '}
+                incl. tax
+              </p>
               {!product.inStock && <p className="error">Out of stock</p>}
             </article>
           );

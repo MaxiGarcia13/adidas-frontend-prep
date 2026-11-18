@@ -1,6 +1,7 @@
-import { PRODUCTS, type Product } from "./data/products";
+import type { Product } from './data/products';
+import { PRODUCTS } from './data/products';
 
-export type ProductDto = Omit<Product, "price"> & { price: number | string };
+export type ProductDto = Omit<Product, 'price'> & { price: number | string };
 
 /** Simulated network API — intentionally a bit messy. */
 export async function fetchProducts(): Promise<ProductDto[]> {
@@ -9,7 +10,9 @@ export async function fetchProducts(): Promise<ProductDto[]> {
   // Occasionally return prices as strings (backend inconsistency).
   return PRODUCTS.map((p, i) => ({
     ...p,
-    price: i % 2 === 0 ? p.price : String(p.price),
+    price: i % 2 === 0
+      ? p.price
+      : String(p.price),
   }));
 }
 

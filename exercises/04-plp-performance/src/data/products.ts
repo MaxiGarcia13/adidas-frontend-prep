@@ -1,12 +1,12 @@
-export type Product = {
+export interface Product {
   id: string;
   name: string;
-  category: "running" | "training" | "lifestyle";
+  category: 'running' | 'training' | 'lifestyle';
   price: number;
   imageUrl: string;
-};
+}
 
-const categories = ["running", "training", "lifestyle"] as const;
+const categories = ['running', 'training', 'lifestyle'] as const;
 
 /** Intentionally large catalog for perf practice. */
 export const PRODUCTS: Product[] = Array.from({ length: 2500 }, (_, i) => {

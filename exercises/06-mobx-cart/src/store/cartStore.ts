@@ -1,6 +1,6 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from 'mobx';
 
-export type CartLine = { productId: string; name: string; price: number; qty: number };
+export interface CartLine { productId: string; name: string; price: number; qty: number }
 
 class CartStore {
   lines: CartLine[] = [];
@@ -28,7 +28,8 @@ class CartStore {
       return;
     }
     const line = this.lines.find((l) => l.productId === productId);
-    if (!line) return;
+    if (!line)
+      return;
     line.qty = qty;
   }
 

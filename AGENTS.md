@@ -10,11 +10,11 @@ Before interviewing or debriefing, read [docs/OFFER-FRONTEND.md](docs/OFFER-FRON
 
 ## Commands the candidate can say
 
-| Say | Mode |
-|-----|------|
-| `Start exercise NN as interviewer` | Interviewer — brief, timebox, no spoilers |
-| `Debrief` | Debrief — process + code review after the attempt |
-| `Teach mode` | Teach — guided solution only after debrief or explicit ask |
+| Say                                | Mode                                                       |
+| ---------------------------------- | ---------------------------------------------------------- |
+| `Start exercise NN as interviewer` | Interviewer — brief, timebox, no spoilers                  |
+| `Debrief`                          | Debrief — process + code review after the attempt          |
+| `Teach mode`                       | Teach — guided solution only after debrief or explicit ask |
 
 `NN` is the exercise id (`00`–`12`), e.g. `Start exercise 01 as interviewer`.
 

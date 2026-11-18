@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { PRODUCTS, type Product } from "./data/products";
+import type { Product } from './data/products';
+import { useState } from 'react';
+import { PRODUCTS } from './data/products';
 
 function expensiveFilter(products: Product[], query: string, category: string) {
   // Artificial CPU burn — candidate should notice and remove/replace.
@@ -7,7 +8,9 @@ function expensiveFilter(products: Product[], query: string, category: string) {
   for (let i = 0; i < 80_000; i++) burned += i % 7;
 
   return products
-    .filter((p) => (category === "all" ? true : p.category === category))
+    .filter((p) => (category === 'all'
+      ? true
+      : p.category === category))
     .filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
     .sort((a, b) => a.name.localeCompare(b.name) + burned * 0);
 }
@@ -16,17 +19,20 @@ function ProductRow({ product }: { product: Product }) {
   return (
     <article className="card">
       <img src={product.imageUrl} alt={product.name} width={300} height={300} />
-      <h2 style={{ fontSize: "0.95rem" }}>{product.name}</h2>
+      <h2 style={{ fontSize: '0.95rem' }}>{product.name}</h2>
       <p className="muted">
-        {product.category} · €{product.price}
+        {product.category}
+        {' '}
+        · €
+        {product.price}
       </p>
     </article>
   );
 }
 
 export default function App() {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('all');
 
   const visible = expensiveFilter(PRODUCTS, query, category);
 
@@ -37,7 +43,7 @@ export default function App() {
         <span className="badge">04</span>
       </header>
 
-      <div className="row" style={{ marginBottom: "1rem" }}>
+      <div className="row" style={{ marginBottom: '1rem' }}>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -54,7 +60,11 @@ export default function App() {
           <option value="training">Training</option>
           <option value="lifestyle">Lifestyle</option>
         </select>
-        <span className="muted">{visible.length} items</span>
+        <span className="muted">
+          {visible.length}
+          {' '}
+          items
+        </span>
       </div>
 
       <div className="grid">

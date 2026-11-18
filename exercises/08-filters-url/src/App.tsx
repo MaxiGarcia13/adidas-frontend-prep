@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
-import { PRODUCTS } from "./data/products";
+import { useMemo, useState } from 'react';
+import { PRODUCTS } from './data/products';
 
 export default function App() {
   // TODO: initialize from URL and keep URL in sync (including back/forward)
-  const [q, setQ] = useState("");
-  const [category, setCategory] = useState("all");
+  const [q, setQ] = useState('');
+  const [category, setCategory] = useState('all');
 
   const visible = useMemo(() => {
     return PRODUCTS.filter((p) => {
-      const matchesCategory = category === "all" || p.category === category;
+      const matchesCategory = category === 'all' || p.category === category;
       const matchesQuery = p.name.toLowerCase().includes(q.toLowerCase());
       return matchesCategory && matchesQuery;
     });
@@ -21,7 +21,7 @@ export default function App() {
         <span className="badge">08</span>
       </header>
 
-      <div className="row" style={{ marginBottom: "1rem" }}>
+      <div className="row" style={{ marginBottom: '1rem' }}>
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -43,7 +43,13 @@ export default function App() {
       <ul>
         {visible.map((p) => (
           <li key={p.id}>
-            {p.name} · {p.category} · €{p.price}
+            {p.name}
+            {' '}
+            ·
+            {p.category}
+            {' '}
+            · €
+            {p.price}
           </li>
         ))}
       </ul>

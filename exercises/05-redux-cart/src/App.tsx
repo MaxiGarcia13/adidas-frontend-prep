@@ -1,11 +1,11 @@
-import { PRODUCTS } from "./data/products";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { PRODUCTS } from './data/products';
 import {
   addToCart,
   selectCartCount,
   selectWishlistCount,
   toggleWishlist,
-} from "./store/cartSlice";
+} from './store/cartSlice';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -18,8 +18,14 @@ export default function App() {
       <header className="header">
         <h1>Redux shop</h1>
         <div className="row">
-          <span className="badge">Cart: {cartCount}</span>
-          <span className="badge">Wish: {wishlistCount}</span>
+          <span className="badge">
+            Cart:
+            {cartCount}
+          </span>
+          <span className="badge">
+            Wish:
+            {wishlistCount}
+          </span>
           <span className="badge">05</span>
         </div>
       </header>
@@ -31,20 +37,22 @@ export default function App() {
             <article className="card" key={p.id}>
               <img src={p.imageUrl} alt={p.name} />
               <h2>{p.name}</h2>
-              <p>€{p.price}</p>
+              <p>
+                €
+                {p.price}
+              </p>
               <div className="row">
                 <button
                   type="button"
                   onClick={() =>
                     dispatch(
-                      addToCart({ productId: p.id, name: p.name, price: p.price })
-                    )
-                  }
+                      addToCart({ productId: p.id, name: p.name, price: p.price }),
+                    )}
                 >
                   Add to cart
                 </button>
                 <button type="button" onClick={() => dispatch(toggleWishlist(p.id))}>
-                  {wished ? "♥" : "♡"}
+                  {wished ? '♥' : '♡'}
                 </button>
               </div>
             </article>

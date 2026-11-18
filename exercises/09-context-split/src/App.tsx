@@ -1,42 +1,51 @@
+import type { ReactNode } from 'react';
 import {
   createContext,
-  useContext,
+
+  use,
   useMemo,
   useRef,
   useState,
-  type ReactNode,
-} from "react";
-import { PRODUCTS } from "./data/products";
+} from 'react';
+import { PRODUCTS } from './data/products';
 
-type CartLine = { id: string; name: string; price: number; qty: number };
+interface CartLine { id: string; name: string; price: number; qty: number }
 
-type AppContextValue = {
-  theme: "light" | "dark";
-  setTheme: (t: "light" | "dark") => void;
+interface AppContextValue {
+  theme: 'light' | 'dark';
+  setTheme: (t: 'light' | 'dark') => void;
   query: string;
   setQuery: (q: string) => void;
   cart: CartLine[];
   add: (id: string, name: string, price: number) => void;
-};
+}
 
 const AppContext = createContext<AppContextValue | null>(null);
 
 function useApp() {
-  const ctx = useContext(AppContext);
-  if (!ctx) throw new Error("missing provider");
+  const ctx = use(AppContext);
+  if (!ctx)
+    throw new Error('missing provider');
   return ctx;
 }
 
 function MegaProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [query, setQuery] = useState("");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [query, setQuery] = useState('');
   const [cart, setCart] = useState<CartLine[]>([]);
 
   const add = (id: string, name: string, price: number) => {
     setCart((prev) => {
       const hit = prev.find((l) => l.id === id);
-      if (hit) return prev.map((l) => (l.id === id ? { ...l, qty: l.qty + 1 } : l));
-      return [...prev, { id, name, price, qty: 1 }];
+      if (hit) {
+        return prev.map((l) => (l.id === id
+          ? { ...l, qty: l.qty + 1 }
+          : l));
+      }
+      return [
+        ...prev,
+        { id, name, price, qty: 1 },
+      ];
     });
   };
 
@@ -50,15 +59,18 @@ function MegaProvider({ children }: { children: ReactNode }) {
     add,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return <AppContext value={value}>{children}</AppContext>;
 }
 
 function RenderCounter({ label }: { label: string }) {
-  const renders = useRef(0);
-  renders.current += 1;
+  const rendersRef = useRef(0);
+  rendersRef.current += 1;
   return (
     <span className="muted">
-      {label} renders: {renders.current}
+      {label}
+      {' '}
+      renders:
+      {rendersRef.current}
     </span>
   );
 }
@@ -82,7 +94,7 @@ function ProductList() {
   const { query, add } = useApp();
   const list = useMemo(
     () => PRODUCTS.filter((p) => p.name.toLowerCase().includes(query.toLowerCase())),
-    [query]
+    [query],
   );
   return (
     <div className="stack">
@@ -90,7 +102,10 @@ function ProductList() {
       <ul>
         {list.map((p) => (
           <li key={p.id} className="row">
-            {p.name} · €{p.price}
+            {p.name}
+            {' '}
+            · €
+            {p.price}
             <button type="button" onClick={() => add(p.id, p.name, p.price)}>
               Add
             </button>
@@ -107,7 +122,10 @@ function CartBadge() {
   return (
     <div className="stack">
       <RenderCounter label="CartBadge" />
-      <span className="badge">Cart items: {count}</span>
+      <span className="badge">
+        Cart items:
+        {count}
+      </span>
     </div>
   );
 }
@@ -123,7 +141,7 @@ export default function App() {
         <p className="muted">
           Typing search should not spam CartBadge renders after you split contexts.
         </p>
-        <div className="stack" style={{ gap: "1rem" }}>
+        <div className="stack" style={{ gap: '1rem' }}>
           <SearchBox />
           <CartBadge />
           <ProductList />

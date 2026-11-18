@@ -1,6 +1,6 @@
-import { observer } from "mobx-react-lite";
-import { PRODUCTS } from "./data/products";
-import { cartStore } from "./store/cartStore";
+import { observer } from 'mobx-react-lite';
+import { PRODUCTS } from './data/products';
+import { cartStore } from './store/cartStore';
 
 function Header() {
   // BUG: Header is not an observer — won't re-render when store changes
@@ -9,7 +9,12 @@ function Header() {
       <h1>MobX shop</h1>
       <div className="row">
         <span className="badge">
-          Cart: {cartStore.count} · €{cartStore.total}
+          Cart:
+          {' '}
+          {cartStore.count}
+          {' '}
+          · €
+          {cartStore.total}
         </span>
         <span className="badge">06</span>
       </div>
@@ -17,14 +22,17 @@ function Header() {
   );
 }
 
-const ProductGrid = observer(function ProductGrid() {
+const ProductGrid = observer(() => {
   return (
     <div className="grid">
       {PRODUCTS.map((p) => (
         <article className="card" key={p.id}>
           <img src={p.imageUrl} alt={p.name} />
           <h2>{p.name}</h2>
-          <p>€{p.price}</p>
+          <p>
+            €
+            {p.price}
+          </p>
           <button type="button" onClick={() => cartStore.add(p.id, p.name, p.price)}>
             Add to cart
           </button>
@@ -37,7 +45,7 @@ const ProductGrid = observer(function ProductGrid() {
 function CartPanel() {
   // BUG: also not observer
   return (
-    <section className="stack" style={{ marginTop: "1.5rem" }}>
+    <section className="stack" style={{ marginTop: '1.5rem' }}>
       <h2>Cart</h2>
       {cartStore.lines.length === 0 && <p className="muted">Empty</p>}
       {cartStore.lines.map((line) => (

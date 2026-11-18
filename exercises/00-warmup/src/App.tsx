@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function App() {
   const [count, setCount] = useState(0);
@@ -11,7 +11,9 @@ export default function App() {
       </header>
       <p className="muted">If you can click this and edit this file, you are ready.</p>
       <button type="button" onClick={() => setCount((c) => c + 1)}>
-        Count: {count}
+        Count:
+        {' '}
+        {count}
       </button>
     </div>
   );
