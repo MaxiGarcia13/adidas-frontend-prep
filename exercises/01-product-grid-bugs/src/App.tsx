@@ -12,6 +12,7 @@ export default function App() {
     setLoading(true);
     setError(null);
 
+    // Bug: No cancellation / stale response guard (StrictMode double-invoke).
     fetchProducts()
       .then((data) => {
         setProducts(data);
