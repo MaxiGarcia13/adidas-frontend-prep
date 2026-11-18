@@ -11,7 +11,7 @@ export default function App() {
   const dispatch = useAppDispatch();
   const cartCount = useAppSelector(selectCartCount);
   const wishlistCount = useAppSelector(selectWishlistCount);
-  const wishlistIds = useAppSelector((s) => s.cart.wishlistIds);
+  const wishlistIds = useAppSelector((state) => state.cart.wishlistIds);
 
   return (
     <div className="app">

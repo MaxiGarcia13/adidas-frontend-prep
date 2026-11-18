@@ -21,14 +21,19 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ productId: string; name: string; price: number }>,
     ) {
-      const existing = state.lines.find((l) => l.productId === action.payload.productId);
-      if (existing) {
-        return;
+      const index = state.lines.findIndex((l) => l.productId === action.payload.productId);
+      if (index !== -1) {
+        state.lines[index].qty++;
+      } else {
+        state.lines.push({ ...action.payload, qty: 1 });
       }
-      state.lines.push({ ...action.payload, qty: 1 });
     },
     toggleWishlist(state, action: PayloadAction<string>) {
-      state.wishlistIds.push(action.payload);
+      if (state.wishlistIds.includes(action.payload)) {
+        state.wishlistIds = state.wishlistIds.filter((id) => id !== action.payload);
+      } else {
+        state.wishlistIds.push(action.payload);
+      }
     },
   },
 });
@@ -40,4 +45,4 @@ export function selectCartCount(state: { cart: CartState }) {
   return state.cart.lines.reduce((n, l) => n + l.qty, 0);
 }
 
-export const selectWishlistCount = (state: { cart: CartState }) => state.cart.lines.length;
+export const selectWishlistCount = (state: { cart: CartState }) => state.cart.wishlistIds.length;
