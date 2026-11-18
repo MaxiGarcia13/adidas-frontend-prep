@@ -1,21 +1,21 @@
 {
   "name": "adidas-frontend-prep",
   "version": "1.0.0",
-  "description": "Frontend technical interview preparation: UI components, state management, web performance, coding challenges.",
-  "main": "index.js",
+  "description": "Adidas frontend interview prep: React/TS exercises (bugs, features, Context, Redux, MobX, performance) with a Cursor interview coach.",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "list": "ls exercises",
+    "dev:00": "pnpm --filter prep-00-warmup dev",
+    "dev:01": "pnpm --filter prep-01-product-grid-bugs dev"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "adidas",
+    "interview",
+    "react",
+    "typescript",
+    "frontend"
+  ],
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "12.21.0",
-      "onFail": "download"
-    }
-  },
-  "packageManager": "pnpm@12.21.0",
-  "type": "module"
+  "packageManager": "pnpm@12.21.0"
 }
