@@ -1,10 +1,8 @@
-export function Header({
-  count,
-  total,
-}: {
-  count: number;
-  total: number;
-}) {
+import { useCart } from './cart-context';
+
+export function Header() {
+  const { count, total } = useCart();
+
   return (
     <header className="header">
       <h1>Shop</h1>

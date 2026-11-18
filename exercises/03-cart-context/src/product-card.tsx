@@ -1,12 +1,13 @@
 import type { Product } from './data/products';
+import { useCart } from './cart-context';
 
 export function ProductCard({
   product,
-  onAdd,
 }: {
   product: Product;
-  onAdd: (p: Product) => void;
 }) {
+  const { add } = useCart();
+
   return (
     <article className="card">
       <img src={product.imageUrl} alt={product.name} />
@@ -15,7 +16,7 @@ export function ProductCard({
         €
         {product.price}
       </p>
-      <button type="button" onClick={() => onAdd(product)}>
+      <button type="button" onClick={() => add(product)}>
         Add to cart
       </button>
     </article>
