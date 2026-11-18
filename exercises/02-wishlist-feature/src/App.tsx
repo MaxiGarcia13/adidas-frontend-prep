@@ -1,9 +1,31 @@
+import { useEffect, useState } from 'react';
+import { loadWishlistIds, saveWishlistIds } from './api';
 import { PRODUCTS } from './data/products';
-// import { loadWishlistIds, saveWishlistIds } from "./api";
+import { ProductItem } from './product-item';
 
 export default function App() {
-  // TODO: replace hard-coded wishlist state with real toggle + persistence
-  const wishlistCount = 0;
+  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    loadWishlistIds().then((ids) => {
+      setWishlistIds(ids);
+    });
+  }, []);
+
+  function toggleWishlist(id: string) {
+    setWishlistIds((prev) => {
+      let newWishlistIds = [...prev];
+
+      if (newWishlistIds.includes(id)) {
+        newWishlistIds = prev.filter((itemId) => itemId !== id);
+      } else {
+        newWishlistIds.push(id);
+      }
+
+      saveWishlistIds(newWishlistIds);
+      return newWishlistIds;
+    });
+  }
 
   return (
     <div className="app">
@@ -12,7 +34,7 @@ export default function App() {
         <div className="row">
           <span className="badge">
             Wishlist:
-            {wishlistCount}
+            {wishlistIds.length}
           </span>
           <span className="badge">02</span>
         </div>
@@ -20,20 +42,14 @@ export default function App() {
 
       <div className="grid">
         {PRODUCTS.map((product) => {
-          const wished = false; // TODO
+          const wished = wishlistIds.includes(product.id);
           return (
-            <article className="card" key={product.id}>
-              <img src={product.imageUrl} alt={product.name} />
-              <h2>{product.name}</h2>
-              <p className="muted">{product.brand}</p>
-              <p>
-                €
-                {product.price}
-              </p>
-              <button type="button">
-                {wished ? '♥ Saved' : '♡ Save'}
-              </button>
-            </article>
+            <ProductItem
+              key={product.id}
+              product={product}
+              wished={wished}
+              onToggleWishlist={toggleWishlist}
+            />
           );
         })}
       </div>
