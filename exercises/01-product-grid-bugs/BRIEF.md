@@ -6,7 +6,7 @@
 
 ## Context
 
-A junior engineer left a PLP (product list page) in a rough state. Marketing needs it demoable.
+Someone left a PLP (product list page) in a rough state. Marketing needs it demoable.
 
 ## Tasks
 
