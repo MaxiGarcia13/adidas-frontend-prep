@@ -54,6 +54,10 @@ const productsSlice = createSlice({
       state.status = 'succeeded';
       state.items = action.payload;
     });
+    builder.addCase(loadProducts.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message ?? 'Unknown error';
+    });
   },
 });
 
