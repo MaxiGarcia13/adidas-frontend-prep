@@ -1,5 +1,5 @@
+import { PRODUCTS } from '@prep/shared/products';
 import { useMemo } from 'react';
-import { PRODUCTS } from './data/products';
 import { cartActions, useAppDispatch, useAppSelector, wishListActions } from './store';
 
 /** Local state on purpose — replace with Redux Toolkit from scratch. */

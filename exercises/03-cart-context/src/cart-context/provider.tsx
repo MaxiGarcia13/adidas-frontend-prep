@@ -1,4 +1,4 @@
-import type { Product } from '../data/products';
+import type { Product } from '@prep/shared/products';
 import { useReducer } from 'react';
 import { CartContext } from './context';
 import { cartReducer } from './reducer';

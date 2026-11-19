@@ -1,4 +1,4 @@
-import { PRODUCTS } from './data/products';
+import { PRODUCTS } from '@prep/shared/products';
 import {
   addToCart,
   selectCartCount,

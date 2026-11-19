@@ -1,5 +1,5 @@
+import { PRODUCTS } from '@prep/shared/products';
 import { observer } from 'mobx-react-lite';
-import { PRODUCTS } from './data/products';
 import { cartStore } from './store/cartStore';
 
 const Header = observer(() => {

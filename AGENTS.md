@@ -4,6 +4,8 @@ This repo is for Adidas frontend interview practice. Prefer the project rule in 
 
 Package manager: **pnpm** workspace. From repo root: `pnpm install`, then `pnpm --filter prep-<exercise> dev` (or `cd exercises/<id> && pnpm dev`).
 
+Shared UI base lives in `packages/prep-shared` (`@prep/shared/styles.css`, `@prep/shared/products`). Prefer that for the common cart catalog and base CSS; keep exercise-local fixtures when the schema or volume is intentional (filters, perf lists, rich PLP).
+
 ## Role context
 
 Before interviewing or debriefing, read [docs/OFFER-FRONTEND.md](docs/OFFER-FRONTEND.md) for the senior FE-relevant offer expectations (React, state management, quality, AI-assisted workflows, senior bar). Keep exercise work frontend-focused; use shared foundations only as light follow-ups.

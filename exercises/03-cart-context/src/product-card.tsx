@@ -1,4 +1,4 @@
-import type { Product } from './data/products';
+import type { Product } from '@prep/shared/products';
 import { useCart } from './cart-context';
 
 export function ProductCard({

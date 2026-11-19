@@ -1,5 +1,5 @@
+import { PRODUCTS } from '@prep/shared/products';
 import { useMemo, useState } from 'react';
-import { PRODUCTS } from './data/products';
 
 export interface CartLine {
   productId: string;

@@ -4,6 +4,7 @@ shellEmulator: true
 
 packages:
   - 'exercises/*'
+  - 'packages/*'
 
 allowBuilds:
   esbuild: true

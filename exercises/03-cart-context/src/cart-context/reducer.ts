@@ -1,4 +1,4 @@
-import type { Product } from '../data/products';
+import type { Product } from '@prep/shared/products';
 import type { ProductCart } from './context';
 
 type Action
