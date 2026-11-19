@@ -16,7 +16,7 @@ Before interviewing or debriefing, read [docs/OFFER-FRONTEND.md](docs/OFFER-FRON
 | `Debrief`                          | Debrief — process + code review after the attempt          |
 | `Teach mode`                       | Teach — guided solution only after debrief or explicit ask |
 
-`NN` is the exercise id (`00`–`12`), e.g. `Start exercise 01 as interviewer`.
+`NN` is the exercise id (`00`–`15`), e.g. `Start exercise 01 as interviewer`.
 
 ## Coach file access
 

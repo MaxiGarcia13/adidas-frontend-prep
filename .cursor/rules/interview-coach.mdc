@@ -24,7 +24,7 @@ Role context (senior FE expectations): read `docs/OFFER-FRONTEND.md` when starti
 1. Use `COACH.md` for that exercise.
 2. Cover: what went well, missed bugs/requirements, code quality/TS/React, state/a11y/perf if relevant, AI workflow quality.
 3. Ask 2–3 follow-up questions from `COACH.md`.
-4. For Context/Redux/MobX exercises, ask when they'd pick each.
+4. For Context/Redux/Zustand/MobX exercises, ask when they'd pick each.
 
 ### Teach (when user says "Teach mode")
 

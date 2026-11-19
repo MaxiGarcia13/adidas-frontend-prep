@@ -74,6 +74,16 @@ Then rotate Tier 2 variants for spaced reps.
 | [11-mobx-computed](exercises/11-mobx-computed) | MobX          | Computed + action discipline        | ~30–35 min |
 | [12-perf-filter](exercises/12-perf-filter)     | Perf          | Expensive derived filter            | ~30 min    |
 
+### Tier 3 — from-scratch state setup
+
+Same PLP + cart/wishlist UI starts on local `useState`. You create the store wiring yourself (no pre-built store folder).
+
+| ID                                                           | Theme         | Distinct case                  | Time       |
+| ------------------------------------------------------------ | ------------- | ------------------------------ | ---------- |
+| [13-redux-from-scratch](exercises/13-redux-from-scratch)     | Redux Toolkit | Provider + slice + typed hooks | ~30–35 min |
+| [14-zustand-from-scratch](exercises/14-zustand-from-scratch) | Zustand       | Store module + selectors       | ~30–35 min |
+| [15-mobx-from-scratch](exercises/15-mobx-from-scratch)       | MobX          | Store + observer + computed    | ~30–35 min |
+
 ## Rules of the game
 
 - Timebox like the interview (~30–35 min for non-warmup).

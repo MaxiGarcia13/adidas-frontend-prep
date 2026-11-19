@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@12.21.0",
-  "description": "Adidas frontend interview prep: React/TS exercises (bugs, features, Context, Redux, MobX, performance) with a Cursor interview coach.",
+  "description": "Adidas frontend interview prep: React/TS exercises (bugs, features, Context, Redux, Zustand, MobX, performance) with a Cursor interview coach.",
   "license": "ISC",
   "keywords": [
     "adidas",
