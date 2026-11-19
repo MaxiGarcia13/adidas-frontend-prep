@@ -1,5 +1,6 @@
 import { PRODUCTS } from '@prep/shared/products';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useCart, useWishList } from './store';
 
 export interface CartLine {
   productId: string;
@@ -10,8 +11,13 @@ export interface CartLine {
 
 /** Local state on purpose — replace with Zustand from scratch. */
 export default function App() {
-  const [lines, setLines] = useState<CartLine[]>([]);
-  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
+  const lines = useCart((state) => state.lines);
+  const addToCart = useCart((state) => state.addToCart);
+  const setQty = useCart((state) => state.setQty);
+  const removeFromCart = useCart((state) => state.removeFromCart);
+
+  const wishListIds = useWishList((state) => state.wishListIds);
+  const toggleWishlist = useWishList((state) => state.toggleWishlist);
 
   const cartCount = useMemo(
     () => lines.reduce((sum, line) => sum + line.qty, 0),
@@ -21,45 +27,6 @@ export default function App() {
     () => lines.reduce((sum, line) => sum + line.price * line.qty, 0),
     [lines],
   );
-
-  function addToCart(productId: string, name: string, price: number) {
-    setLines((prev) => {
-      const existing = prev.find((line) => line.productId === productId);
-      if (existing) {
-        return prev.map((line) =>
-          (line.productId === productId
-            ? { ...line, qty: line.qty + 1 }
-            : line));
-      }
-      return [
-        ...prev,
-        { productId, name, price, qty: 1 },
-      ];
-    });
-  }
-
-  function setQty(productId: string, qty: number) {
-    setLines((prev) => {
-      if (qty <= 0) {
-        return prev.filter((line) => line.productId !== productId);
-      }
-      return prev.map((line) =>
-        (line.productId === productId
-          ? { ...line, qty }
-          : line));
-    });
-  }
-
-  function removeFromCart(productId: string) {
-    setLines((prev) => prev.filter((line) => line.productId !== productId));
-  }
-
-  function toggleWishlist(productId: string) {
-    setWishlistIds((prev) =>
-      (prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]));
-  }
 
   return (
     <div className="app">
@@ -77,7 +44,7 @@ export default function App() {
           <span className="badge">
             Wish:
             {' '}
-            {wishlistIds.length}
+            {wishListIds.length}
           </span>
           <span className="badge">14</span>
         </div>
@@ -85,7 +52,7 @@ export default function App() {
 
       <div className="grid">
         {PRODUCTS.map((product) => {
-          const wished = wishlistIds.includes(product.id);
+          const wished = wishListIds.includes(product.id);
           return (
             <article className="card" key={product.id}>
               <img src={product.imageUrl} alt={product.name} />
@@ -97,7 +64,12 @@ export default function App() {
               <div className="row">
                 <button
                   type="button"
-                  onClick={() => addToCart(product.id, product.name, product.price)}
+                  onClick={() => addToCart({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    qty: 1,
+                  })}
                 >
                   Add to cart
                 </button>
