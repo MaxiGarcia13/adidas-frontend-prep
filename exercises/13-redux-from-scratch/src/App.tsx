@@ -1,17 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { PRODUCTS } from './data/products';
-
-export interface CartLine {
-  productId: string;
-  name: string;
-  price: number;
-  qty: number;
-}
+import { cartActions, useAppDispatch, useAppSelector, wishListActions } from './store';
 
 /** Local state on purpose — replace with Redux Toolkit from scratch. */
 export default function App() {
-  const [lines, setLines] = useState<CartLine[]>([]);
-  const [wishlistIds, setWishlistIds] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+
+  const lines = useAppSelector((state) => state.cart.lines);
+  const wishlistIds = useAppSelector((state) => state.wishList.productsIds);
 
   const cartCount = useMemo(
     () => lines.reduce((sum, line) => sum + line.qty, 0),
@@ -23,42 +19,19 @@ export default function App() {
   );
 
   function addToCart(productId: string, name: string, price: number) {
-    setLines((prev) => {
-      const existing = prev.find((line) => line.productId === productId);
-      if (existing) {
-        return prev.map((line) =>
-          (line.productId === productId
-            ? { ...line, qty: line.qty + 1 }
-            : line));
-      }
-      return [
-        ...prev,
-        { productId, name, price, qty: 1 },
-      ];
-    });
+    dispatch(cartActions.addToCart({ productId, name, price }));
   }
 
   function setQty(productId: string, qty: number) {
-    setLines((prev) => {
-      if (qty <= 0) {
-        return prev.filter((line) => line.productId !== productId);
-      }
-      return prev.map((line) =>
-        (line.productId === productId
-          ? { ...line, qty }
-          : line));
-    });
+    dispatch(cartActions.setQty({ productId, qty }));
   }
 
   function removeFromCart(productId: string) {
-    setLines((prev) => prev.filter((line) => line.productId !== productId));
+    dispatch(cartActions.removeFromCart(productId));
   }
 
   function toggleWishlist(productId: string) {
-    setWishlistIds((prev) =>
-      (prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]));
+    dispatch(wishListActions.toggleWishList(productId));
   }
 
   return (
