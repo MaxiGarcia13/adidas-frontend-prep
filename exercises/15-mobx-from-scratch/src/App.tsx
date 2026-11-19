@@ -1,16 +1,13 @@
 import { PRODUCTS } from '@prep/shared/products';
+import { observer } from 'mobx-react-lite';
 import { useMemo, useState } from 'react';
-
-export interface CartLine {
-  productId: string;
-  name: string;
-  price: number;
-  qty: number;
-}
+import { cartStore } from './store';
 
 /** Local state on purpose — replace with MobX from scratch. */
-export default function App() {
-  const [lines, setLines] = useState<CartLine[]>([]);
+// eslint-disable-next-line react-refresh/only-export-components
+function App() {
+  const lines = cartStore.lines;
+
   const [wishlistIds, setWishlistIds] = useState<string[]>([]);
 
   const cartCount = useMemo(
@@ -21,38 +18,6 @@ export default function App() {
     () => lines.reduce((sum, line) => sum + line.price * line.qty, 0),
     [lines],
   );
-
-  function addToCart(productId: string, name: string, price: number) {
-    setLines((prev) => {
-      const existing = prev.find((line) => line.productId === productId);
-      if (existing) {
-        return prev.map((line) =>
-          (line.productId === productId
-            ? { ...line, qty: line.qty + 1 }
-            : line));
-      }
-      return [
-        ...prev,
-        { productId, name, price, qty: 1 },
-      ];
-    });
-  }
-
-  function setQty(productId: string, qty: number) {
-    setLines((prev) => {
-      if (qty <= 0) {
-        return prev.filter((line) => line.productId !== productId);
-      }
-      return prev.map((line) =>
-        (line.productId === productId
-          ? { ...line, qty }
-          : line));
-    });
-  }
-
-  function removeFromCart(productId: string) {
-    setLines((prev) => prev.filter((line) => line.productId !== productId));
-  }
 
   function toggleWishlist(productId: string) {
     setWishlistIds((prev) =>
@@ -97,7 +62,11 @@ export default function App() {
               <div className="row">
                 <button
                   type="button"
-                  onClick={() => addToCart(product.id, product.name, product.price)}
+                  onClick={() => cartStore.addToCart({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                  })}
                 >
                   Add to cart
                 </button>
@@ -116,14 +85,14 @@ export default function App() {
         {lines.map((line) => (
           <div className="row" key={line.productId}>
             <strong>{line.name}</strong>
-            <button type="button" onClick={() => setQty(line.productId, line.qty - 1)}>
+            <button type="button" onClick={() => cartStore.setQty(line.productId, line.qty - 1)}>
               −
             </button>
             <span>{line.qty}</span>
-            <button type="button" onClick={() => setQty(line.productId, line.qty + 1)}>
+            <button type="button" onClick={() => cartStore.setQty(line.productId, line.qty + 1)}>
               +
             </button>
-            <button type="button" onClick={() => removeFromCart(line.productId)}>
+            <button type="button" onClick={() => cartStore.removeFromCart(line.productId)}>
               Remove
             </button>
           </div>
@@ -132,3 +101,5 @@ export default function App() {
     </div>
   );
 }
+
+export default observer(App);
